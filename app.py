@@ -209,6 +209,21 @@ with tab2:
     fig4.tight_layout()
     st.pyplot(fig4, use_container_width=True)
 
+st.subheader("Event vs Rating Heatmap")
+heatmap_data = pd.crosstab(df["Event Name"], df["Rating"])
+fig_heatmap, ax_heatmap = plt.subplots(figsize=(8, 4.2))
+heatmap_plot = ax_heatmap.imshow(heatmap_data.values, cmap="YlOrRd", aspect="auto")
+ax_heatmap.set_xticks(range(len(heatmap_data.columns)))
+ax_heatmap.set_xticklabels(heatmap_data.columns)
+ax_heatmap.set_yticks(range(len(heatmap_data.index)))
+ax_heatmap.set_yticklabels(heatmap_data.index)
+ax_heatmap.set_xlabel("Rating")
+ax_heatmap.set_ylabel("Event Name")
+plt.setp(ax_heatmap.get_xticklabels(), rotation=0)
+fig_heatmap.colorbar(heatmap_plot, ax=ax_heatmap, label="Participant Count")
+fig_heatmap.tight_layout()
+st.pyplot(fig_heatmap, use_container_width=True)
+
 st.subheader("Word Cloud of Feedback")
 feedback_text = " ".join(df['Processed Feedback'])
 
