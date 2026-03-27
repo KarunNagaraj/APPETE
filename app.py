@@ -3,6 +3,7 @@ from pathlib import Path
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import nltk
 import pandas as pd
 import streamlit as st
 from nltk import FreqDist
@@ -27,6 +28,9 @@ st.caption("A simple overview of participation, feedback, ratings, and event per
 
 df = pd.read_csv(CSV_PATH)
 df.columns = df.columns.str.strip()
+
+nltk.download("stopwords", quiet=True)
+nltk.download("vader_lexicon", quiet=True)
 
 def style_axis(ax):
     ax.set_facecolor("#fbfdff")
